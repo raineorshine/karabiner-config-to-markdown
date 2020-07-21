@@ -33,8 +33,12 @@ const template = (s, o) => {
 const Modifiers = modifiers =>
   modifiers.mandatory.map(s => s + ' + ').join('')
 
+/** Renders a manipulator's to' or 'from' entry. */
+const ManipulatorEntry = entry =>
+  entry.key_code || entry.shell_command || '?'
+
 const Manipulator = manipulator => {
-  return `${Modifiers(manipulator.from.modifiers)}${manipulator.from.key_code} → ${manipulator.to.map(t => t.key_code).join(', ')}`
+  return `${Modifiers(manipulator.from.modifiers)}${manipulator.from.key_code} → ${manipulator.to.map(ManipulatorEntry).join(', ')}`
 }
 
 const Rule = rule => {

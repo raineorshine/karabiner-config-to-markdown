@@ -15,20 +15,20 @@ This is my current karabiner setup for custom key bindings.
   - right_shift + open_bracket → left_arrow
   - right_shift + close_bracket → right_arrow
 - Launch apps: Right shift + letters
-  - right_shift + a → 
-  - right_shift + c → 
-  - right_shift + k → 
-  - right_shift + e → 
-  - right_shift + t → 
-  - right_shift + h → 
-  - right_shift + j → 
-  - right_shift + n → 
-  - right_shift + m → 
-  - right_shift + d → 
-  - right_shift + f → 
-  - right_shift + v → 
-  - right_shift + w → 
-  - right_shift + z → 
+  - right_shift + a → open '/Applications/Utilities/Activity Monitor.app'
+  - right_shift + c → open '/Applications/Calendar.app'
+  - right_shift + k → open '/Applications/Sublime Text.app'
+  - right_shift + e → open /System/Library/CoreServices/Finder.app
+  - right_shift + t → open '/Applications/GitHub Desktop.app'
+  - right_shift + h → open '/Applications/Google Chrome.app'
+  - right_shift + j → open '/Applications/Notion.app'
+  - right_shift + n → open '/Applications/Karabiner-Elements.app'
+  - right_shift + m → open '/Applications/Messages.app'
+  - right_shift + d → open '/Applications/Spotify.app'
+  - right_shift + f → open '/Applications/iTerm.app'
+  - right_shift + v → open '/Applications/Brave Browser.app'
+  - right_shift + w → open '/Applications/WhatsApp.app'
+  - right_shift + z → open '/Applications/zoom.us.app'
 - Tab Navigation: Command + h/i
   - command + h → open_bracket
   - command + l → close_bracket

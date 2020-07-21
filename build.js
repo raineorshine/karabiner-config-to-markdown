@@ -30,6 +30,8 @@ const template = (s, o) => {
  * Render
  ************************************/
 
+const ShellCommand = command => `\`${command}\``
+
 const Modifiers = modifiers => {
   // normalize from/to modifiers
   const modifiersArray = Array.isArray(modifiers)
@@ -40,7 +42,7 @@ const Modifiers = modifiers => {
 
 /** Renders a manipulator's to' or 'from' entry. */
 const ManipulatorEntry = entry =>
-  `${entry.modifiers ? Modifiers(entry.modifiers) : ''}${entry.key_code || entry.shell_command || ''}`
+  `${entry.modifiers ? Modifiers(entry.modifiers) : ''}${entry.key_code || (entry.shell_command ? ShellCommand(entry.shell_command) : '')}`
 
 const Manipulator = manipulator => {
   return `${ManipulatorEntry(manipulator.from)} → ${manipulator.to.map(ManipulatorEntry).join(', ')}`

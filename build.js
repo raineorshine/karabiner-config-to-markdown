@@ -1,0 +1,57 @@
+const fs = require('fs')
+const path = require('path')
+const configPath = path.resolve(process.argv[2] || './karabiner.json')
+const config = require(configPath)
+const readmeTemplate = fs.readFileSync('./readme-template.txt', 'utf-8')
+
+/************************************
+ * Constants
+ ************************************/
+
+const excludeRules = {
+  'Vi Mode: D as Trigger Key': true
+}
+
+/************************************
+ * Helpers
+ ************************************/
+
+const not = f => (...args) => !f(...args)
+const indent = s => '  ' + s
+const template = (s, o) => {
+  let output = s
+  for (const [key, value] of Object.entries(o)) {
+    output = output.replace(new RegExp(`\\{\\{\\w*${key}\\w*}}`), value)
+  }
+  return output
+}
+
+/************************************
+ * Render
+ ************************************/
+
+const Modifiers = modifiers =>
+  modifiers.mandatory.map(s => s + ' + ').join('')
+
+const Manipulator = manipulator => {
+  return `${Modifiers(manipulator.from.modifiers)}${manipulator.from.key_code} → ${manipulator.to.map(t => t.key_code).join(', ')}`
+}
+
+const Rule = rule => {
+  const renderedManipulators = rule.manipulators
+    .map(manipulator =>
+      '\n' + indent('- ' + Manipulator(manipulator))
+    ).join('')
+  return `- ${rule.description}${renderedManipulators}\n`
+}
+
+/************************************
+ * Main
+ ************************************/
+
+const rules = config.profiles[0].complex_modifications.rules
+  .filter(rule => !(rule.description in excludeRules))
+
+const output = template(readmeTemplate, { rules: rules.map(Rule).join('') })
+
+console.log(output)

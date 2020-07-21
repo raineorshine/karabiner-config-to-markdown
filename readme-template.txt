@@ -1,6 +1,6 @@
 # Raine's Karabiner Config
 
-This is my current karabiner setup for custom key bindings.
+This is my [Karabiner](https://karabiner-elements.pqrs.org) setup for custom key bindings.
 
 {{rules}}
 

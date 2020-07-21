@@ -6,11 +6,11 @@ This is my [Karabiner](https://karabiner-elements.pqrs.org) setup for custom key
   - L-Option + `'` → `` ` ``
 - Better Braces: Alt + o/i
   - L-Option + `l` → `[`
-  - L-Option + `semicolon` → `]`
+  - L-Option + `;` → `]`
   - L-Shift + L-Option + `l` → L-Shift + `[`
-  - L-Shift + L-Option + `semicolon` → L-Shift + `]`
+  - L-Shift + L-Option + `;` → L-Shift + `]`
   - L-Command + L-Option + `l` → L-Command + `[`
-  - L-Command + L-Option + `semicolon` → L-Command + `]`
+  - L-Command + L-Option + `;` → L-Command + `]`
 - Desktop Navigation: Right shift + brackets
   - R-Shift + `[` → L-Ctrl + `→`
   - R-Shift + `]` → L-Ctrl + `←`

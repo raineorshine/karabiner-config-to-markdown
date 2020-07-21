@@ -29,16 +29,6 @@ const config = fs.readFileSync('~/.config/karabiner/karabiner.json', 'utf-8')
 console.log(karabinerConfigToMarkdown(config))
 ```
 
-## Options
-
-The module accepts an `options` object:
-
-```js
-karabinerConfigToMarkdown(config, options)
-```
-
-- **`layout`** - Convert an alternate keyboard layout back to QWERTY. Values: `"qwerty"` (default) | `"colemak"`.
-
 ## Example
 
 ### Input:

@@ -1,5 +1,3 @@
-const { toQwerty } = require('qwerty-to-colemak')
-
 /************************************
  * Constants
  ************************************/
@@ -43,23 +41,16 @@ const plus = s => s + ' + '
 const compose = (...fns) =>
   fns.reduceRight((prev, next) =>
     (...args) => next(prev(...args)),
-  x => x
-  )
-
-/** Converts the character to QWERTY, and if the conversion fails return as-is. */
-const toQwertyGuarded = s => toQwerty(s) || s
+  id)
 
 /************************************
  * Render
  ************************************/
 
-const KeyboardLayout = (options = {}) => options.layout === 'colemak'
-  ? toQwertyGuarded
-  : id
 const Pretty = keyCode => keys[keyCode] || keyCode
 const Code = s => `\`${s}\``
 const ShellCommand = Code
-const Key = (s, options = {}) => compose(Code, Pretty, KeyboardLayout(options))(s)
+const Key = compose(Code, Pretty)
 
 const Modifiers = modifiers => {
   // normalize from/to modifiers
@@ -70,21 +61,21 @@ const Modifiers = modifiers => {
 }
 
 /** Renders a manipulator's to' or 'from' entry. */
-const ManipulatorEntry = (entry, options = {}) =>
+const ManipulatorEntry = entry =>
   `${entry.modifiers ? Modifiers(entry.modifiers) : ''}${
-    entry.key_code ? Key(entry.key_code, options) :
+    entry.key_code ? Key(entry.key_code) :
     entry.shell_command ? ShellCommand(entry.shell_command) :
     ''
   }`
 
-const Manipulator = (manipulator, options = {}) => {
-  return `${ManipulatorEntry(manipulator.from, options)} → ${manipulator.to.map(entry => ManipulatorEntry(entry, options)).join(', ')}`
+const Manipulator = manipulator => {
+  return `${ManipulatorEntry(manipulator.from)} → ${manipulator.to.map(ManipulatorEntry).join(', ')}`
 }
 
-const Rule = (rule, options = {}) => {
+const Rule = rule => {
   const renderedManipulators = rule.manipulators
     .map(manipulator =>
-      '\n' + indent('- ' + Manipulator(manipulator, options))
+      '\n' + indent('- ' + Manipulator(manipulator))
     ).join('')
   return `- ${rule.description}${renderedManipulators}\n`
 }
@@ -93,10 +84,10 @@ const Rule = (rule, options = {}) => {
  * Main
  ************************************/
 
-const karabinerConfigToMarkdown = (config, options = {}) => {
+const karabinerConfigToMarkdown = config => {
   const rules = config.profiles[0].complex_modifications.rules
     .filter(rule => !(rule.description in excludeRules))
-  return rules.map(rule => Rule(rule, options)).join('')
+  return rules.map(Rule).join('')
 }
 
 module.exports = karabinerConfigToMarkdown

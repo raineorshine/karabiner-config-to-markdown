@@ -17,8 +17,8 @@
   "license": "ISC",
   "scripts": {
     "lint": "eslint .",
-    "test": "ava --verbose",
-    "watch": "npm run test -- --watch"
+    "test": "ava --tap | tap-mocha-reporter spec",
+    "watch": "ava --verbose --watch"
   },
   "devDependencies": {
     "ava": "^3.10.1",
@@ -28,6 +28,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "tap-mocha-reporter": "^5.0.1"
   }
 }

@@ -8,14 +8,19 @@ Convert a [Karabiner](https://karabiner-elements.pqrs.org) config to markdown. A
 npm install -g karabiner-config-to-markdown
 ```
 
-## CLI
+## Usage
+
+### CLI
 
 ```sh
-karabiner-config-to-markdown # read ~/.config/karabiner/karabiner.json
-karabiner-config-to-markdown myconfig.json # or pass file path
+# read ~/.config/karabiner/karabiner.json
+karabiner-config-to-markdown
+
+# or pass path to config file
+karabiner-config-to-markdown myconfig.json
 ```
 
-## Module
+### Module
 
 ```js
 const fs = require('fs')
@@ -23,6 +28,16 @@ const karabinerConfigToMarkdown = require('karabiner-config-to-markdown')
 const config = fs.readFileSync('~/.config/karabiner/karabiner.json', 'utf-8')
 console.log(karabinerConfigToMarkdown(config))
 ```
+
+## Options
+
+The module accepts an `options` object:
+
+```js
+karabinerConfigToMarkdown(config, options)
+```
+
+- **`layout`** - Convert an alternate keyboard layout back to QWERTY. Values: `"qwerty"` (default) | `"colemak"`.
 
 ## Example
 

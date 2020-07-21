@@ -20,5 +20,8 @@
   },
   "devDependencies": {
     "ava": "^3.10.1"
+  },
+  "dependencies": {
+    "qwerty-to-colemak": "^0.1.0"
   }
 }

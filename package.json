@@ -8,8 +8,17 @@
     "url": "https://github.com/raineorshine"
   },
   "main": "index.js",
+  "engines": {
+    "node": ">10"
+  },
   "bin": {
     "karabiner-config-to-markdown": "bin.js"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "test": "ava"
+  },
+  "devDependencies": {
+    "ava": "^3.10.1"
+  }
 }

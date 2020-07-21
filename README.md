@@ -7,13 +7,13 @@ This is my current karabiner setup for custom key bindings.
 - Better Braces: Alt + o/i
   - left_option + l → open_bracket
   - left_option + semicolon → close_bracket
-  - left_shift + left_option + l → open_bracket
-  - left_shift + left_option + semicolon → close_bracket
-  - left_command + left_option + l → open_bracket
-  - left_command + left_option + semicolon → close_bracket
+  - left_shift + left_option + l → left_shift + open_bracket
+  - left_shift + left_option + semicolon → left_shift + close_bracket
+  - left_command + left_option + l → left_command + open_bracket
+  - left_command + left_option + semicolon → left_command + close_bracket
 - Desktop Navigation: Right shift + brackets
-  - right_shift + open_bracket → left_arrow
-  - right_shift + close_bracket → right_arrow
+  - right_shift + open_bracket → left_control + left_arrow
+  - right_shift + close_bracket → left_control + right_arrow
 - Launch apps: Right shift + letters
   - right_shift + a → open '/Applications/Utilities/Activity Monitor.app'
   - right_shift + c → open '/Applications/Calendar.app'
@@ -30,8 +30,8 @@ This is my current karabiner setup for custom key bindings.
   - right_shift + w → open '/Applications/WhatsApp.app'
   - right_shift + z → open '/Applications/zoom.us.app'
 - Tab Navigation: Command + h/i
-  - command + h → open_bracket
-  - command + l → close_bracket
+  - command + h → command + left_shift + open_bracket
+  - command + l → command + left_shift + close_bracket
 
 
 ## Rule Renderer

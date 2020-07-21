@@ -30,15 +30,20 @@ const template = (s, o) => {
  * Render
  ************************************/
 
-const Modifiers = modifiers =>
-  modifiers.mandatory.map(s => s + ' + ').join('')
+const Modifiers = modifiers => {
+  // normalize from/to modifiers
+  const modifiersArray = Array.isArray(modifiers)
+    ? modifiers
+    : [...modifiers.mandatory || [], ...modifiers.optional || []]
+  return modifiersArray.map(s => s + ' + ').join('')
+}
 
 /** Renders a manipulator's to' or 'from' entry. */
 const ManipulatorEntry = entry =>
-  entry.key_code || entry.shell_command || '?'
+  `${entry.modifiers ? Modifiers(entry.modifiers) : ''}${entry.key_code || entry.shell_command || ''}`
 
 const Manipulator = manipulator => {
-  return `${Modifiers(manipulator.from.modifiers)}${manipulator.from.key_code} → ${manipulator.to.map(ManipulatorEntry).join(', ')}`
+  return `${ManipulatorEntry(manipulator.from)} → ${manipulator.to.map(ManipulatorEntry).join(', ')}`
 }
 
 const Rule = rule => {

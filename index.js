@@ -1,9 +1,3 @@
-const fs = require('fs')
-const path = require('path')
-const configPath = path.resolve(process.argv[2] || './karabiner.json')
-const config = require(configPath)
-const readmeTemplate = fs.readFileSync('./readme-template.txt', 'utf-8')
-
 /************************************
  * Constants
  ************************************/
@@ -99,9 +93,10 @@ const Rule = rule => {
  * Main
  ************************************/
 
-const rules = config.profiles[0].complex_modifications.rules
-  .filter(rule => !(rule.description in excludeRules))
+const karabinerConfigToMarkdown = config => {
+  const rules = config.profiles[0].complex_modifications.rules
+    .filter(rule => !(rule.description in excludeRules))
+  return rules.map(Rule).join('')
+}
 
-const output = template(readmeTemplate, { rules: rules.map(Rule).join('') })
-
-console.log(output)
+module.exports = karabinerConfigToMarkdown

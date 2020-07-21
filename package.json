@@ -1,15 +1,15 @@
 {
-  "name": "karabiner-config",
-  "description": "Raine's Karabiner Config",
+  "name": "karabiner-config-to-markdown",
+  "description": "Convert a Karabiner config to markdown.",
   "version": "0.0.0",
   "author": {
     "name": "Raine Revere",
     "email": "raine@cybersemics.org",
     "url": "https://github.com/raineorshine"
   },
-  "scripts": {
-    "build": "node build.js karabiner.json > README.md"
+  "main": "index.js",
+  "bin": {
+    "karabiner-config-to-markdown": "bin.js"
   },
-  "license": "ISC",
-  "private": true
+  "license": "ISC"
 }

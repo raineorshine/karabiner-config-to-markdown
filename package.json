@@ -16,10 +16,19 @@
   },
   "license": "ISC",
   "scripts": {
-    "test": "ava"
+    "lint": "eslint .",
+    "test": "ava --verbose",
+    "watch": "npm run test -- --watch"
   },
   "devDependencies": {
-    "ava": "^3.10.1"
+    "ava": "^3.10.1",
+    "eslint": "^7.5.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
   },
   "dependencies": {
     "qwerty-to-colemak": "^0.1.0"

@@ -37,23 +37,14 @@ const keys = {
  ************************************/
 
 const id = x => x
-const not = f => (...args) => !f(...args)
 const indent = s => '  ' + s
 const plus = s => s + ' + '
 
 const compose = (...fns) =>
   fns.reduceRight((prev, next) =>
     (...args) => next(prev(...args)),
-    x => x
+  x => x
   )
-
-const template = (s, o) => {
-  let output = s
-  for (const [key, value] of Object.entries(o)) {
-    output = output.replace(new RegExp(`\\{\\{\\w*${key}\\w*}}`), value)
-  }
-  return output
-}
 
 /** Converts the character to QWERTY, and if the conversion fails return as-is. */
 const toQwertyGuarded = s => toQwerty(s) || s
@@ -62,13 +53,13 @@ const toQwertyGuarded = s => toQwerty(s) || s
  * Render
  ************************************/
 
-const KeyboardLayout = (options={}) => options.layout === 'colemak'
+const KeyboardLayout = (options = {}) => options.layout === 'colemak'
   ? toQwertyGuarded
   : id
 const Pretty = keyCode => keys[keyCode] || keyCode
 const Code = s => `\`${s}\``
 const ShellCommand = Code
-const Key = (s, options={}) => compose(Code, Pretty, KeyboardLayout(options))(s)
+const Key = (s, options = {}) => compose(Code, Pretty, KeyboardLayout(options))(s)
 
 const Modifiers = modifiers => {
   // normalize from/to modifiers
@@ -79,18 +70,18 @@ const Modifiers = modifiers => {
 }
 
 /** Renders a manipulator's to' or 'from' entry. */
-const ManipulatorEntry = (entry, options={}) =>
+const ManipulatorEntry = (entry, options = {}) =>
   `${entry.modifiers ? Modifiers(entry.modifiers) : ''}${
     entry.key_code ? Key(entry.key_code, options) :
-    (entry.shell_command ? ShellCommand(entry.shell_command) :
+    entry.shell_command ? ShellCommand(entry.shell_command) :
     ''
-  )}`
+  }`
 
-const Manipulator = (manipulator, options={}) => {
+const Manipulator = (manipulator, options = {}) => {
   return `${ManipulatorEntry(manipulator.from, options)} → ${manipulator.to.map(entry => ManipulatorEntry(entry, options)).join(', ')}`
 }
 
-const Rule = (rule, options={}) => {
+const Rule = (rule, options = {}) => {
   const renderedManipulators = rule.manipulators
     .map(manipulator =>
       '\n' + indent('- ' + Manipulator(manipulator, options))
@@ -102,7 +93,7 @@ const Rule = (rule, options={}) => {
  * Main
  ************************************/
 
-const karabinerConfigToMarkdown = (config, options={}) => {
+const karabinerConfigToMarkdown = (config, options = {}) => {
   const rules = config.profiles[0].complex_modifications.rules
     .filter(rule => !(rule.description in excludeRules))
   return rules.map(rule => Rule(rule, options)).join('')

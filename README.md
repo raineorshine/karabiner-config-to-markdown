@@ -1,11 +1,11 @@
-# karibiner-config-to-markdown
+# karabiner-config-to-markdown
 
 Convert a [Karabiner](https://karabiner-elements.pqrs.org) config to markdown. A simple way to publish your custom key bindings.
 
 ## Install
 
 ```sh
-npm install -g karibiner-config-to-markdown
+npm install -g karabiner-config-to-markdown
 ```
 
 ## CLI

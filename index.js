@@ -29,6 +29,7 @@ const keys = {
   right_option: 'R-Option',
   right_shift: 'R-Shift',
   semicolon: ';',
+  spacebar: 'Space',
   shift: 'Shift',
   up_arrow: '↑',
 }

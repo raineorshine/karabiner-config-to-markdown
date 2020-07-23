@@ -9,3 +9,11 @@ test('test', t => {
   const output = karabinerConfigToMarkdown(config)
   t.is(output, expected)
 })
+
+test('shifted char', t => {
+  const config = require('./shiftedChar.json')
+  const output = karabinerConfigToMarkdown(config)
+  t.is(output, `- test
+  - L-Shift + L-Option + \`l\` → \`{\`
+`)
+})

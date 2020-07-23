@@ -30,6 +30,10 @@ const keys = {
   up_arrow: '↑',
 }
 
+/** Chars that can be uppercased with shift. */
+const lowercaseChars = '`1234567890-=[];\',./'
+const uppercaseChars = '~!@#$%^&*()_+{}:"<>?'
+
 /************************************
  * Helpers
  ************************************/
@@ -43,30 +47,49 @@ const compose = (...fns) =>
     (...args) => next(prev(...args)),
   id)
 
+/** Converts a key_code to its corresponding char. */
+const keyCodeToChar = keyCode => keys[keyCode] || keyCode
+
+/** Converts a shiftable lowercase char to uppercase. */
+const shift= c => {
+  const i = lowercaseChars.indexOf(c)
+  return i !== -1 ? uppercaseChars[i] : c
+}
+
+/** Returns true if a manipulator's 'to' entry contains Shift + shiftableChar. */
+const isShiftable = entry =>
+  // shift modifier
+  (entry.modifiers && entry.modifiers.length == 1 && entry.modifiers[0].includes('shift') &&
+  // shiftable char
+  lowercaseChars.includes(keyCodeToChar(entry.key_code)))
+
 /************************************
  * Render
  ************************************/
 
-const Pretty = keyCode => keys[keyCode] || keyCode
 const Code = s => `\`${s}\``
 const ShellCommand = Code
-const Key = compose(Code, Pretty)
+const Key = compose(Code, keyCodeToChar)
 
 const Modifiers = modifiers => {
   // normalize from/to modifiers
   const modifiersArray = Array.isArray(modifiers)
     ? modifiers
     : [...modifiers.mandatory || [], ...modifiers.optional || []]
-  return modifiersArray.map(compose(plus, Pretty)).join('')
+  return modifiersArray.map(compose(plus, keyCodeToChar)).join('')
 }
 
-/** Renders a manipulator's to' or 'from' entry. */
+/** Renders a manipulator's 'to' or 'from' entry. */
 const ManipulatorEntry = entry =>
-  `${entry.modifiers ? Modifiers(entry.modifiers) : ''}${
-    entry.key_code ? Key(entry.key_code) :
-    entry.shell_command ? ShellCommand(entry.shell_command) :
-    ''
-  }`
+  isShiftable(entry)
+    // if shift + shiftable char, render shifted char
+    ? Key(shift(keyCodeToChar(entry.key_code)))
+    // otherwise render modifiers and Key/ShellCommand
+    : `${entry.modifiers ? Modifiers(entry.modifiers) : ''}${
+      entry.key_code ? Key(entry.key_code) :
+      entry.shell_command ? ShellCommand(entry.shell_command) :
+      ''
+    }`
 
 const Manipulator = manipulator => {
   return `${ManipulatorEntry(manipulator.from)} → ${manipulator.to.map(ManipulatorEntry).join(', ')}`

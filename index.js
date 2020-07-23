@@ -7,6 +7,7 @@ const excludeRules = {
 }
 
 const keys = {
+  backslash: '\\',
   close_bracket: ']',
   command: 'Command',
   control: 'Ctrl',
@@ -33,8 +34,8 @@ const keys = {
 }
 
 /** Chars that can be uppercased with shift. */
-const lowercaseChars = '`1234567890-=[];\',./'
-const uppercaseChars = '~!@#$%^&*()_+{}:"<>?'
+const lowercaseChars = '`1234567890-=[]\\;\',./'
+const uppercaseChars = '~!@#$%^&*()_+{}|:"<>?'
 
 /************************************
  * Helpers

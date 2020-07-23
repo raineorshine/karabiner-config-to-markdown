@@ -11,7 +11,9 @@ const keys = {
   command: 'Command',
   control: 'Ctrl',
   down_arrow: '↓',
+  equal_sign: '=',
   grave_accent_and_tilde: '` ` `', // double backtick with space to escape
+  hyphen: '-',
   left_arrow: '→',
   left_command: 'L-Command',
   left_control: 'L-Ctrl',

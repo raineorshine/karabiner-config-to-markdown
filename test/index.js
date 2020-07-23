@@ -17,3 +17,11 @@ test('shifted char', t => {
   - L-Shift + L-Option + \`l\` → \`{\`
 `)
 })
+
+test('shifted tilde', t => {
+  const config = require('./shiftedTilde.json')
+  const output = karabinerConfigToMarkdown(config)
+  t.is(output, `- test
+  - L-Option + \`f\` → \`~\`
+`)
+})

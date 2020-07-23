@@ -12,7 +12,7 @@ const keys = {
   control: 'Ctrl',
   down_arrow: '↓',
   equal_sign: '=',
-  grave_accent_and_tilde: '` ` `', // double backtick with space to escape
+  grave_accent_and_tilde: '`',
   hyphen: '-',
   left_arrow: '→',
   left_command: 'L-Command',
@@ -69,7 +69,8 @@ const isShiftable = entry =>
  * Render
  ************************************/
 
-const Code = s => `\`${s}\``
+// double backtick with spaces to escape backtick in markdown
+const Code = s => `\`${s === '`' ? '` ' + s + ' `' : s}\``
 const ShellCommand = Code
 const Key = compose(Code, keyCodeToChar)
 

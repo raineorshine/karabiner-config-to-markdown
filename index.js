@@ -36,7 +36,7 @@ const keys = {
 
 /** Chars that can be uppercased with shift. */
 const lowercaseChars = '`1234567890-=[]\\;\',./'
-const uppercaseChars = '~!@#$%^&*()_+{}|:"<>?'
+const uppercaseChars = '~!@#$%^&*()_+{}|:"<>?'
 
 /************************************
  * Helpers
@@ -55,17 +55,17 @@ const compose = (...fns) =>
 const keyCodeToChar = keyCode => keys[keyCode] || keyCode
 
 /** Converts a shiftable lowercase char to uppercase. */
-const shift= c => {
-  const i = lowercaseChars.indexOf(c)
-  return i !== -1 ? uppercaseChars[i] : c
+const shift = c => {
+  const i = lowercaseChars.indexOf(c)
+  return i !== -1 ? uppercaseChars[i] : c
 }
 
 /** Returns true if a manipulator's 'to' entry contains Shift + shiftableChar. */
-const isShiftable = entry =>
+const isShiftable = entry =>
   // shift modifier
-  (entry.modifiers && entry.modifiers.length == 1 && entry.modifiers[0].includes('shift') &&
+  entry.modifiers && entry.modifiers.length === 1 && entry.modifiers[0].includes('shift') &&
   // shiftable char
-  lowercaseChars.includes(keyCodeToChar(entry.key_code)))
+  lowercaseChars.includes(keyCodeToChar(entry.key_code))
 
 /************************************
  * Render

@@ -10,18 +10,37 @@ test('test', t => {
   t.is(output, expected)
 })
 
-test('shifted char', t => {
-  const config = require('./shiftedChar.json')
-  const output = karabinerConfigToMarkdown(config)
-  t.is(output, `- test
-  - L-Shift + L-Option + \`l\` → \`{\`
-`)
-})
+test('shifted chars', t => {
 
-test('shifted tilde', t => {
-  const config = require('./shiftedTilde.json')
-  const output = karabinerConfigToMarkdown(config)
+  const keyCodes = [
+    '[',
+    ']',
+    'comma',
+    'period',
+    '`',
+  ]
+
+  const shiftedManipulator = key_code => ({
+    from: { key_code: '*' },
+    to: [{ key_code: key_code, modifiers: ['left_shift'] }]
+  })
+
+  const output = karabinerConfigToMarkdown({
+    profiles: [{
+      complex_modifications: {
+        rules: [{
+          description: 'test',
+          manipulators: keyCodes.map(shiftedManipulator)
+        }
+      ]}
+    }]
+  })
+
   t.is(output, `- test
-  - L-Option + \`f\` → \`~\`
+  - \`*\` → \`{\`
+  - \`*\` → \`}\`
+  - \`*\` → \`<\`
+  - \`*\` → \`>\`
+  - \`*\` → \`~\`
 `)
 })

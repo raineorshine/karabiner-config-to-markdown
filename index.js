@@ -9,6 +9,7 @@ const excludeRules = {
 const keys = {
   backslash: '\\',
   close_bracket: ']',
+  comma: ',',
   command: 'Command',
   control: 'Ctrl',
   down_arrow: '↓',
@@ -22,6 +23,7 @@ const keys = {
   left_shift: 'L-Shift',
   open_bracket: '[',
   option: 'Option',
+  period: '.',
   quote: '\'',
   right_arrow: '←',
   right_command: 'R-Command',

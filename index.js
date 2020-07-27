@@ -75,15 +75,23 @@ const isShiftable = entry =>
 
 // double backtick with spaces to escape backtick in markdown
 const Code = s => `\`${s === '`' ? '` ' + s + ' `' : s}\``
+const Optional = s => `[${s}]`
 const ShellCommand = Code
 const Key = compose(Code, keyCodeToChar)
 
 const Modifiers = modifiers => {
-  // normalize from/to modifiers
-  const modifiersArray = Array.isArray(modifiers)
-    ? modifiers
-    : [...modifiers.mandatory || [], ...modifiers.optional || []]
-  return modifiersArray.map(compose(plus, keyCodeToChar)).join('')
+
+  const optionalModifiers = modifiers.optional || []
+
+  // normalize from/to/modifiers
+  const mandatoryModifiers = Array.isArray(modifiers) ? modifiers : modifiers.mandatory || []
+
+  // render modifiers as plus-delimited list
+  return [
+    // wrap optional modifiers in brackets
+    ...optionalModifiers.map(compose(plus, Optional, keyCodeToChar)),
+    ...mandatoryModifiers.map(compose(plus, keyCodeToChar)),
+  ].join('')
 }
 
 /** Renders a manipulator's 'to' or 'from' entry. */

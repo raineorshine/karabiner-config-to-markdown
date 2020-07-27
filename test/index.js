@@ -44,3 +44,33 @@ test('shifted chars', t => {
   - \`*\` → \`~\`
 `)
 })
+
+test('Optional modifiers', t => {
+
+  const shiftedManipulator = key_code => ({
+  })
+
+  const output = karabinerConfigToMarkdown({
+    profiles: [{
+      complex_modifications: {
+        rules: [{
+          description: 'test',
+          manipulators: [{
+            from: {
+              key_code: 'a',
+              modifiers: {
+                optional: ['left_shift'],
+                mandatory: ['left_option'],
+              }
+            },
+            to: [{ key_code: 'b' }]
+          }]
+        }
+      ]}
+    }]
+  })
+
+  t.is(output, `- test
+  - [L-Shift] + L-Option + \`a\` → \`b\`
+`)
+})

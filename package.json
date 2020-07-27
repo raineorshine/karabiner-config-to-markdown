@@ -1,7 +1,7 @@
 {
   "name": "karabiner-config-to-markdown",
   "description": "Convert a Karabiner config to markdown.",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "author": {
     "name": "Raine Revere",
     "email": "raine@cybersemics.org",

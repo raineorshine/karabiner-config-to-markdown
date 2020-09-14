@@ -20,9 +20,9 @@ test('shifted chars', t => {
     '`',
   ]
 
-  const shiftedManipulator = key_code => ({
+  const shiftedManipulator = keyCode => ({
     from: { key_code: '*' },
-    to: [{ key_code: key_code, modifiers: ['left_shift'] }]
+    to: [{ key_code: keyCode, modifiers: ['left_shift'] }]
   })
 
   const output = karabinerConfigToMarkdown({
@@ -32,7 +32,7 @@ test('shifted chars', t => {
           description: 'test',
           manipulators: keyCodes.map(shiftedManipulator)
         }
-      ]}
+        ] }
     }]
   })
 
@@ -46,9 +46,6 @@ test('shifted chars', t => {
 })
 
 test('Optional modifiers', t => {
-
-  const shiftedManipulator = key_code => ({
-  })
 
   const output = karabinerConfigToMarkdown({
     profiles: [{
@@ -66,7 +63,7 @@ test('Optional modifiers', t => {
             to: [{ key_code: 'b' }]
           }]
         }
-      ]}
+        ] }
     }]
   })
 

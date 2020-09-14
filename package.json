@@ -17,7 +17,7 @@
   "license": "ISC",
   "scripts": {
     "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix",
+    "lintfix": "npm run lint -- --fix",
     "test": "ava --tap | tap-mocha-reporter spec",
     "watch": "ava --verbose --watch"
   },
